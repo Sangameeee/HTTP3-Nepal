@@ -1,0 +1,13 @@
+{"step": "curated_loaded", "ts": "2026-08-05T11:43:14.095014+00:00", "count": 286}
+{"step": "crtsh_query_ok", "ts": "2026-08-05T11:43:14.098970+00:00", "suffix": "gov.np", "hosts_found": 2091, "certs_seen": 2546}
+{"step": "crtsh_query_ok", "ts": "2026-08-05T11:43:14.106405+00:00", "suffix": "edu.np", "hosts_found": 3494, "certs_seen": 2659}
+{"step": "crtsh_query_ok", "ts": "2026-08-05T11:43:14.114854+00:00", "suffix": "org.np", "hosts_found": 3318, "certs_seen": 2845}
+{"step": "crtsh_query_ok", "ts": "2026-08-05T11:43:14.123868+00:00", "suffix": "com.np", "hosts_found": 647, "certs_seen": 4234}
+{"step": "crtsh_query_ok", "ts": "2026-08-05T11:46:01.746352+00:00", "suffix": "net.np", "hosts_found": 792, "certs_seen": 3840}
+{"step": "crtsh_query_ok", "ts": "2026-08-05T11:49:35.401621+00:00", "suffix": "mil.np", "hosts_found": 19, "certs_seen": 52}
+{"step": "gov_crawl_blocked_by_robots", "ts": "2026-08-05T11:49:45.419167+00:00", "seed": "https://nepal.gov.np/"}
+{"step": "tranco_done", "ts": "2026-08-05T11:49:46.758023+00:00", "np_hits": 266, "cross_confirmed": 48}
+{"step": "merged", "ts": "2026-08-05T11:49:46.759810+00:00", "unique_domains": 3434}
+{"step": "dns_validation_done", "ts": "2026-08-05T11:54:28.509693+00:00", "accepted": 2175, "rejected": 1259, "unvalidated": 0}
+{"step": "sampled_to_target", "ts": "2026-08-05T11:54:28.512765+00:00", "kept": 1200, "sampled_out": 975, "target_max": 1200}
+{"step": "build_complete", "ts": "2026-08-05T11:54:28.528110+00:00", "accepted": 1200, "rejected": 1259, "unvalidated": 0, "sampled_out": 975, "total_source_requests": 6}

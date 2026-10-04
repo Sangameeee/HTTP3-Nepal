@@ -1,0 +1,76 @@
+# National and provincial-language media seed list.
+#
+# Provenance: domains for the top-ranked outlets were verified on 2026-08-05
+# against news.feedspot.com/nepal_news_websites/ (which lists live URLs, not
+# just names) and cross-checked against each outlet's own search result
+# snippet. Entries marked "unverified" below were not confirmed against an
+# external source listing a URL and are best-effort recall; the DNS
+# resolution step in build_corpus.py will drop any that don't resolve.
+sector: media
+source: curated_press_council
+notes: "National English/Nepali dailies, online-native outlets, provincial press"
+domains:
+  # Verified against news.feedspot.com/nepal_news_websites/, 2026-08-05
+  - onlinekhabar.com
+  - nagariknews.nagariknetwork.com
+  - nepalitimes.com
+  - rajdhanidaily.com
+  - newsofnepal.com
+  - osnepal.com
+  - abhiyandaily.com
+  - kathmandutribune.com
+  - techmandu.com
+  - thehimalayantimes.com
+  - news24nepal.tv
+  - ekantipur.com
+  - myrepublica.nagariknetwork.com
+  - ratopati.com
+  - nayapatrikadaily.com
+  - setopati.com
+  - ujyaaloonline.com
+  - arthasarokar.com
+  - kathmandupost.com
+  - nepalsamaya.com
+  - gorkhapatraonline.com
+  - hamrakura.com
+  - janaaastha.com
+  - karobardaily.com
+  - thahakhabar.com
+  - aarthiknews.com
+  - risingnepaldaily.com
+  - nepalipatra.com
+  - baahrakhari.com
+  - newbusinessage.com
+  - theannapurnaexpress.com
+  - eadarsha.com
+  - peoplesreview.com.np
+  - telegraphnepal.com
+  - onlinemajdoor.com
+  - onlinetvnepal.com
+  - topnepalnews.com
+  - lokaantar.com
+  - nayapage.com
+  # Additional outlets, unverified against an external source with a listed
+  # URL -- best-effort recall, subject to DNS-validation drop.
+  - annapurnapost.com
+  - khabarhub.com
+  - bizmandu.com
+  - haamropatro.com
+  - dainiknepal.com
+  - deshsanchar.com
+  - pahilopost.com
+  - southasiacheck.org
+  - reportersnepal.com
+  - imagekhabar.com
+  - avenuesnepal.com
+  - nepal24hours.com
+  - kantipurtv.com
+  - ntv.org.np
+  - abcnews.com.np
+  - swasthyakhabar.com
+  - clickmandu.com
+  - biratnagartoday.com
+  - pokharatimes.com
+  - butwaltoday.com
+  - dharantimes.com
+  - madhesitoday.com

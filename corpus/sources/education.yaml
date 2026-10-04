@@ -1,0 +1,41 @@
+# Higher-education seed list.
+#
+# Provenance: universities and domains verified on 2026-08-05 directly
+# against ugcnepal.edu.np/pages/university-7/, the UGC's own university
+# listing page, which gave a URL for each entry. Constituent-campus entries
+# below that page were not individually verified and are best-effort recall,
+# subject to DNS-validation drop by build_corpus.py.
+sector: education
+source: curated_ugc
+notes: "UGC-recognized universities (verified) and constituent campuses (unverified)"
+domains:
+  # Verified against ugcnepal.edu.np/pages/university-7/, 2026-08-05
+  - ugcnepal.edu.np
+  - tu.edu.np
+  - nsu.edu.np
+  - ku.edu.np
+  - purbanchaluniversity.edu.np
+  - pu.edu.np
+  - lbu.edu.np
+  - fwu.edu.np
+  - mwu.edu.np
+  - afu.edu.np
+  - nou.edu.np
+  - rju.edu.np
+  - mbust.edu.np
+  - yogmayaau.edu.np
+  - unepal.edu.np
+  # Constituent campuses / affiliated institutes, unverified
+  - ioe.edu.np
+  - iom.edu.np
+  - pcampus.edu.np
+  - patancampus.edu.np
+  - trichandracollege.edu.np
+  - amrit.edu.np
+  - bpkihs.edu.np
+  - ncit.edu.np
+  - islingtoncollege.edu.np
+  - britishcollege.edu.np
+  - kingscollege.edu.np
+  - heraldcollege.edu.np
+  - lacollege.edu.np

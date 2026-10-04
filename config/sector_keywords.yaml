@@ -1,0 +1,171 @@
+# Keyword classifier for domains left "unclassified" after suffix-based
+# sector assignment (build_corpus.py labels *.gov.np/*.edu.np as their sector
+# directly; everything under org.np/com.np/net.np and Tranco .np hits with no
+# suffix signal falls into "unclassified" by default).
+#
+# Manual inspection of the unclassified set (2026-08-05, corpus/domains.csv)
+# showed it is NOT mostly mis-sectored businesses -- it is dominated by
+# personal-name domains (e.g. "ananda-subedi.com.np") and small NGOs/clubs
+# that genuinely fall outside RQ1's six named sectors (government, banking,
+# telecom, news/media, education, e-commerce). This file's job is therefore
+# two things, not one:
+#   1. Pull the minority that DOES belong to one of the six sectors out of
+#      "unclassified" and into it (a bank or news outlet that happens to use
+#      a bare .com.np/.org.np, missed by suffix-only classification).
+#   2. Explicitly separate the NGO/personal/other majority into
+#      "other_not_in_scope" rather than leaving it muddled under
+#      "unclassified" -- those two labels mean different things
+#      ("not one of the 6 sectors, confirmed by a real signal" vs. "no
+#      signal either way") and RQ1's denominator should only ever be built
+#      from confirmed sector members, not from "unclassified" leftovers.
+#
+# Matching: case-insensitive substring match against the full hostname.
+# Sectors are checked in the order listed below; first match wins. A domain
+# matching nothing in `sectors` is then checked against
+# `other_not_in_scope`. A domain matching neither stays "unclassified" --
+# never forced into a bucket by this classifier.
+#
+# This is a coarse heuristic, not ground truth: false positives/negatives
+# are possible (e.g. a person surnamed "Karki" running "karkibank.com.np" as
+# a personal blog would false-positive into banking). Every reclassification
+# is logged to corpus/classification_log.csv with the matched keyword, so a
+# reviewer -- or the author, before submission -- can audit every decision
+# this file made.
+
+version: "2026-08-05"
+
+sectors:
+  banking:
+    - bank
+    - bikas
+    - finance
+    - financ
+    - bima
+    - beema
+    - insuran
+    - laghubitta
+    - microfinan
+    - sahakari
+    - saccos
+    - capitalnepal
+    - merchantbanking
+    - nepalstock
+    - cdsc
+    - sebon
+
+  ecommerce_fintech:
+    - shop
+    - store
+    - bazaar
+    - pasal
+    - kirana
+    - cart
+    - ecommerce
+    - e-commerce
+    - khalti
+    - esewa
+    - fonepay
+    - imepay
+    - wallet
+    - delivery
+    - mart
+    - deals
+    - offermandu
+
+  telecom:
+    - telecom
+    - broadband
+    - wireless
+    - isp
+    - fiber
+    - fibre
+    - wifi
+    - netlink
+    - cybernet
+    - dataline
+    - ntc
+    - ncell
+
+  media:
+    - news
+    - khabar
+    - patrika
+    - samachar
+    - media
+    - press
+    - times
+    - television
+    - radio
+    - awaaj
+    - aawaaj
+    - sandesh
+    - prakashan
+    - tribune
+    - herald
+    - bulletin
+    - post.
+
+  education:
+    - school
+    - college
+    - university
+    - academy
+    - vidya
+    - shiksha
+    - institute
+    - gurukul
+    - pathshala
+    - boarding
+    - campus
+
+  government:
+    - sarkar
+    - mantralaya
+    - adalat
+    - nagarpalika
+    - gaunpalika
+    - palika
+    - sansad
+    - pradesh
+    - karyalaya
+    - prashasan
+    - jilla
+    - rajaswa
+    - ministry
+    - department
+
+# Checked only if nothing above matched. A hit here means "confirmed not one
+# of the 6 RQ1 sectors" (an NGO, personal site, club, religious or sporting
+# body) -- distinct from "unclassified", which means no signal either way.
+other_not_in_scope:
+  - foundation
+  - ngo
+  - trust
+  - society
+  - sangh
+  - sangathan
+  - forum
+  - association
+  - alumni
+  - welfare
+  - charity
+  - mission
+  - church
+  - temple
+  - mandir
+  - gumba
+  - monastery
+  - hospital
+  - clinic
+  - aspatal
+  - sports
+  - football
+  - cricket
+  - yuwa
+  - yuva
+  - mahila
+  - samaj
+  - manch
+  - abhiyan
+  - pariwar
+  - smarak

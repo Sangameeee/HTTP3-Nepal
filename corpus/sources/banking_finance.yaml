@@ -1,0 +1,123 @@
+# Banking, insurance and capital-markets seed list.
+#
+# Provenance: Nepal Rastra Bank "List of Licensed BFIs" (classes A commercial,
+# B development, C finance, D microfinance), Nepal Insurance Authority licensed
+# insurer list, and NEPSE/CDSC/SEBON. Institution *names* and class membership
+# were cross-checked on 2026-08-05 against en.wikipedia.org/wiki/List_of_banks_in_Nepal
+# and investopaper.com's Class-A list; Class B/C domain strings were taken
+# directly from Wikipedia's table where it listed a URL. Class A domains and
+# insurer domains were not corroborated by an external source with a listed
+# URL (neither Wikipedia's Class-A table nor NRB's own site surfaced them in
+# search) and are therefore best-effort recall of well-known brand domains.
+# This is a documented limitation: candidates that don't resolve are dropped
+# by build_corpus.py's DNS-validation step and logged to corpus/rejected.csv,
+# not silently kept, but a wrong-but-resolving guess (e.g. a parked domain
+# under a plausible name) would not be caught by that filter. Before
+# submission, spot-check this file's Class-A and insurer rows against
+# https://www.nrb.org.np and https://www.nia.gov.np directly.
+#
+# Domains are the institutions' public web presence, not their e-banking
+# portals; e-banking hostnames are frequently on separate infrastructure and are
+# picked up separately by CT enumeration, which is the point of doing both.
+sector: banking
+source: curated_nrb_nia_nepse
+notes: "NRB class A-D licensed institutions, insurers, capital markets infrastructure"
+domains:
+  # Regulators and market infrastructure
+  - nrb.org.np
+  - nepalstock.com.np
+  - cdsclnepal.com
+  - nia.gov.np
+  - sebon.gov.np
+  # Class A - commercial banks (20, per Wikipedia / Investopaper, 2026-08-05)
+  # Domains are best-effort recall, unverified by an external source with a
+  # listed URL -- see provenance note above.
+  - nepalbank.com.np
+  - rbb.com.np
+  - adbl.gov.np
+  - citizensbank.com.np
+  - everestbankltd.com
+  - globalimebank.com
+  - himalayanbank.com
+  - kumaribank.com
+  - laxmisunrise.com
+  - machbank.com
+  - nabilbank.com
+  - nibl.com.np
+  - nepalsbi.com.np
+  - nicasiabank.com
+  - nmb.com.np
+  - prabhubank.com
+  - primebank.com.np
+  - sanimabank.com
+  - siddharthabank.com
+  - sc.com
+  # Class B - development banks (domains per en.wikipedia.org/wiki/List_of_banks_in_Nepal, 2026-08-05)
+  - garimabank.com.np
+  - jbbl.com.np
+  - kamanasewabank.com
+  - lumbinibikasbank.com
+  - mahalaxmibank.com
+  - muktinathbank.com.np
+  - shangrilabank.com
+  - srdb.com.np
+  - corporatebank.com.np
+  - edb.com.np
+  - greenbank.com.np
+  - miteribank.com.np
+  - ndbl.com.np
+  - salapabikasbank.com.np
+  - skdbl.com.np
+  - sindhubank.com.np
+  # Class C - finance companies (domains per Wikipedia, 2026-08-05)
+  - bestfinance.com.np
+  - centralfinance.com.np
+  - gurkhasfinance.com.np
+  - goodwillfinance.com.np
+  - gmbf.com.np
+  - icfcbank.com
+  - jfcjanakpur.com
+  - manjushreefinance.com.np
+  - multipurposefinance.com
+  - nepalfinancelimited.com.np
+  - pokharafinance.com.np
+  - pfltd.com.np
+  - reliancenepal.com.np
+  - shreefinance.com.np
+  # Class D - microfinance (best-effort recall, unverified)
+  - nirdhan.com.np
+  - chhimekbank.com.np
+  - deprosc.com.np
+  - swabalamban.com.np
+  - forwardmicrofinance.com.np
+  - jeevanbikas.com.np
+  - mahuli.com.np
+  # Life insurers (names per NIA-sourced list via search, 2026-08-05; domains
+  # are best-effort recall, unverified)
+  - nepallife.com.np
+  - nationallife.com.np
+  - rastriyajeevan.com.np
+  - prabhumahalaxmilife.com
+  - metlife.com.np
+  - himalayanlife.com
+  - asianlife.com.np
+  - imelifeinsurance.com
+  - reliablenepallife.com
+  - sanimareliancelife.com
+  - citizenlife.com.np
+  - sunnepallife.com
+  - licnepal.com.np
+  # Non-life insurers (names per NIA-sourced list via search, 2026-08-05;
+  # domains are best-effort recall, unverified)
+  - nepalinsurance.com.np
+  - orientalinsurance.com.np
+  - rastriyabeema.com.np
+  - nationalinsurance.com.np
+  - unitedajod.com
+  - necoinsurance.com.np
+  - sagarmathalumbini.com.np
+  - prabhuinsurance.com
+  - igiprudential.com
+  - shikharinsurance.com
+  - nlg.com.np
+  - siddharthapremier.com

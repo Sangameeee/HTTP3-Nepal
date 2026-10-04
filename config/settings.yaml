@@ -1,0 +1,154 @@
+# Central configuration for the quic-nepal measurement pipeline.
+# Everything a reviewer would need to know about how the measurement was
+# parameterised lives here, not in code.
+
+study:
+  # Free-text label recorded into every run file.
+  name: "Who Actually Serves HTTP/3 in Nepal?"
+  # Contact address advertised in the User-Agent of every request we make.
+  # Ethics requirement: operators must be able to reach the measurer.
+  contact_email: "bibekkingsoft@gmail.com"
+  user_agent: >-
+    quic-nepal-research/0.1 (HTTP/3 adoption measurement study, Kathmandu;
+    contact: bibekkingsoft@gmail.com)
+  # Fixed seed for every sampling / shuffling decision in the pipeline.
+  random_seed: 42
+
+corpus:
+  target_min: 600
+  target_max: 1200
+  # If the fully-validated candidate set exceeds target_max, sample down to
+  # it (stratified proportionally by sector, fixed random_seed above) rather
+  # than truncating arbitrarily. Domains cut by this step are never deleted
+  # silently -- they are written to corpus/sampled_out.csv.
+  sample_to_target_if_exceeded: true
+  # Hard ceiling on network requests to *source services* issued by a single
+  # corpus build run: crt.sh (a shared community resource) and the
+  # nepal.gov.np crawl (which is itself a government target). The build
+  # aborts further work in this category rather than exceeding this
+  # silently. Per operator sign-off on 2026-08-05.
+  max_network_requests: 2000
+
+  # Separate, larger ceiling for DNS-resolvability validation specifically.
+  # These are lookups against public resolvers (1.1.1.1 / 8.8.8.8 / 9.9.9.9),
+  # not requests to Nepali target infrastructure, so they are tracked
+  # independently from max_network_requests above. Sized to comfortably
+  # cover the ~3,300 unique candidates CT enumeration produced on
+  # 2026-08-05 (2,091 gov.np + 3,494 edu.np + 3,318 org.np + 647 com.np raw
+  # hostnames, collapsing to ~3,297 registrable domains after merge).
+  # Operator approved validating the full candidate set and sampling down
+  # afterward, rather than sampling before validation, on 2026-08-05.
+  dns_validation_budget: 4000
+  # Politeness: minimum seconds between requests to the same host.
+  per_host_delay_s: 1.0
+  dns_concurrency: 12
+  http_concurrency: 4
+  dns_timeout_s: 5.0
+  http_timeout_s: 20.0
+  # Resolvers used for corpus validation. Public resolvers are used here (not
+  # the ISP resolver) so that corpus membership does not depend on which ISP
+  # the build happened to run on. Phase 2 probing deliberately uses the local
+  # ISP resolver instead - that difference is itself a measurement.
+  validation_resolvers: ["1.1.1.1", "8.8.8.8", "9.9.9.9"]
+
+  # Certificate Transparency enumeration. The .np registry publishes no zone
+  # file, so CT is the primary enumeration path for the second-level suffixes.
+  ct:
+    enabled: true
+    base_url: "https://crt.sh/"
+    suffixes:
+      - "gov.np"
+      - "edu.np"
+      - "org.np"
+      - "com.np"
+      - "net.np"
+      - "mil.np"
+    # crt.sh is slow and frequently times out on wide queries. Each suffix gets
+    # this many attempts before the build degrades gracefully and says so.
+    attempts: 3
+    timeout_s: 60
+    cache_dir: "corpus/cache/crtsh"
+
+  # Crawl of the national portal for linked ministry / department domains.
+  gov_crawl:
+    enabled: true
+    seed: "https://nepal.gov.np/"
+    max_pages: 25
+    respect_robots: true
+
+  # Popularity cross-check.
+  tranco:
+    enabled: true
+    url: "https://tranco-list.eu/top-1m.csv.zip"
+    cache_dir: "corpus/cache/tranco"
+
+  # Second-level suffixes treated as public suffixes for .np. tldextract's
+  # bundled PSL snapshot is authoritative; this list is a documented fallback
+  # used only if the snapshot is unavailable.
+  np_public_suffixes:
+    ["com.np", "org.np", "edu.np", "net.np", "gov.np", "mil.np", "aero.np",
+     "asia.np", "biz.np", "coop.np", "info.np", "museum.np", "name.np", "pro.np"]
+
+# --- Phases 2-4: recorded here now so the parameters are version-controlled
+# alongside the corpus they will be applied to. Not yet consumed by Phase 1.
+probe:
+  concurrency: 30
+  per_domain_timeout_s: 10.0
+  inter_request_delay_s: 0.25
+  runs_required: 3
+  cross_validation_fraction: 0.10
+  curl_path: "/opt/homebrew/opt/curl/bin/curl"
+  schema_version: "1.0.0"
+
+vantage_points:
+  # Labels only; the operator selects the active one at run time with
+  # --vantage-point. Institutional names are kept out of the manuscript's
+  # blinded version (see Phase 5).
+  - id: "wired_isp_a"
+    label: "Residential fibre, ISP A (wired, Ethernet via USB-C adapter)"
+    access: "wired"
+  - id: "wired_isp_b"
+    label: "Residential fibre, ISP B (wired, Ethernet via USB-C adapter)"
+    access: "wired"
+  - id: "mobile_ntc"
+    label: "NTC mobile data (4G)"
+    access: "mobile"
+  - id: "mobile_ncell"
+    label: "Ncell mobile data (4G)"
+    access: "mobile"
+  - id: "institutional"
+    label: "Institutional campus network"
+    access: "wired"
+
+viability:
+  idle_intervals_s: [30, 60, 120]
+  initial_padding_bytes: [1200, 1350, 1400, 1450, 1500]
+  # Reference servers with known-good, stable HTTP/3 support -- named in the
+  # brief plus a few more for redundancy in case any one of them changes
+  # config mid-study. Chosen for operator diversity (not all Cloudflare) so
+  # a path-blocking finding isn't just "Cloudflare's IP range specifically."
+  reference_servers:
+    - {host: "cloudflare-quic.com", operator: "Cloudflare"}
+    - {host: "quic.nginx.org", operator: "nginx (AWS-hosted)"}
+    - {host: "www.google.com", operator: "Google"}
+    - {host: "www.facebook.com", operator: "Meta"}
+    - {host: "www.cloudflare.com", operator: "Cloudflare"}
+    - {host: "http3.is", operator: "LiteSpeed (independent test site)"}
+    - {host: "www.litespeedtech.com", operator: "LiteSpeed"}
+    - {host: "quic.aiortc.org", operator: "aioquic project's own test server"}
+  # Asymmetric UDP/TCP throughput comparison: originally planned against
+  # Cloudflare's speed-test endpoint (speed.cloudflare.com), but that
+  # subdomain turned out NOT to support HTTP/3 at all when checked directly
+  # (confirmed independently via curl --http3-only and this repo's own
+  # quic_probe.py -- both get an immediate connection failure across all 4
+  # resolved IPs, not a timeout). Falls back to downloading each reference
+  # server's own homepage over QUIC vs. TCP/H2 instead. This is NOT a
+  # controlled-size speed test (page sizes vary by server, typically tens
+  # to hundreds of KB, not the multi-MB a real throughput test wants) --
+  # documented as a real limitation in phases.md rather than presented as
+  # equivalent to a dedicated speed-test payload.
+  throughput_test_bytes_note: "no reliable public multi-MB HTTP/3 test file found; using reference servers' own homepages instead, see phases.md"
+
+perf:
+  trials_per_domain: 30
+  min_qualifying_domains: 40

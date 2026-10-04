@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+phases.md
+paper/
+*.pyc
+*.egg-info/
+corpus/cache/
+data/raw/*.jsonl
+data/processed/
+output/figures/*
+output/tables/*
+!output/figures/.gitkeep
+!output/tables/.gitkeep
+.DS_Store

@@ -1,0 +1,182 @@
+# ASN -> ownership class mapping.
+#
+# This file is an artifact of the paper: RQ2 ("of the hosts that support HTTP/3,
+# how many are served by foreign CDNs vs. origins in Nepal?") is answered
+# entirely by this mapping applied to observed IPs. It is therefore versioned,
+# published with the repository, and never edited implicitly by code.
+#
+# Classes:
+#   foreign_cdn      - global anycast CDN / edge network, origin location unknown
+#   foreign_hosting  - foreign IaaS/VPS/dedicated hosting, not an edge CDN
+#   nepali_hosting   - AS registered to a Nepali operator, announced from Nepal
+#   unknown          - not in this file. NEVER silently bucketed. Reported as
+#                      its own count in every RQ2 table.
+#
+# Provenance: the foreign_cdn/foreign_hosting entries below are large,
+# well-known global providers (Cloudflare, Akamai, AWS, etc.) whose ASN
+# numbers are stable, widely published, public knowledge -- low error risk.
+# The nepali_hosting entries are the opposite case: small, less-documented
+# regional operators where a wrong guess is easy to make and easy to miss.
+# Every nepali_hosting numeric entry was therefore live-verified against
+# Team Cymru's DNS whois on 2026-08-05 (see that section's own comment for
+# what that caught). Re-verify the foreign entries against
+# https://bgp.tools / RIPEstat before publication too -- ASN allocations do
+# occasionally change hands -- but they were not the section that turned out
+# to be wrong during this build.
+version: "2026-08-05"
+
+classes:
+  - foreign_cdn
+  - foreign_hosting
+  - nepali_hosting
+  - unknown
+
+asns:
+  # ---------------- foreign_cdn ----------------
+  13335: {class: foreign_cdn, name: "Cloudflare"}
+  209242: {class: foreign_cdn, name: "Cloudflare London / spectrum"}
+  394536: {class: foreign_cdn, name: "Cloudflare"}
+  54113: {class: foreign_cdn, name: "Fastly"}
+  20940: {class: foreign_cdn, name: "Akamai International"}
+  16625: {class: foreign_cdn, name: "Akamai Technologies"}
+  32787: {class: foreign_cdn, name: "Akamai (Prolexic)"}
+  21342: {class: foreign_cdn, name: "Akamai (AS21342)"}
+  15169: {class: foreign_cdn, name: "Google"}
+  19527: {class: foreign_cdn, name: "Google (AS19527)"}
+  396982: {class: foreign_cdn, name: "Google Cloud"}
+  16509: {class: foreign_cdn, name: "Amazon AWS (also CloudFront edge)"}
+  14618: {class: foreign_cdn, name: "Amazon AWS (us-east-1 legacy)"}
+  16276: {class: foreign_hosting, name: "OVH"}
+  8075: {class: foreign_cdn, name: "Microsoft (Azure Front Door / CDN)"}
+  8068: {class: foreign_cdn, name: "Microsoft Corporation"}
+  32934: {class: foreign_cdn, name: "Meta / Facebook"}
+  22822: {class: foreign_cdn, name: "Limelight / Edgio"}
+  60068: {class: foreign_cdn, name: "Datacamp / CDN77"}
+  136907: {class: foreign_cdn, name: "Huawei Cloud"}
+  37963: {class: foreign_cdn, name: "Alibaba Cloud"}
+  24429: {class: foreign_cdn, name: "Alibaba (Taobao)"}
+  55990: {class: foreign_cdn, name: "Huawei Cloud (AS55990)"}
+  132203: {class: foreign_cdn, name: "Tencent Cloud"}
+  # StackPath / Sucuri / Imperva style scrubbing+CDN
+  12989: {class: foreign_cdn, name: "Highwinds/StackPath"}
+  19551: {class: foreign_cdn, name: "Incapsula / Imperva"}
+  30148: {class: foreign_cdn, name: "Sucuri"}
+
+  # ---------------- foreign_hosting ----------------
+  14061: {class: foreign_hosting, name: "DigitalOcean"}
+  24940: {class: foreign_hosting, name: "Hetzner"}
+  63949: {class: foreign_hosting, name: "Akamai/Linode"}
+  20473: {class: foreign_hosting, name: "Vultr / Choopa"}
+  26496: {class: foreign_hosting, name: "GoDaddy Hosting"}
+  398101: {class: foreign_hosting, name: "GoDaddy"}
+  46606: {class: foreign_hosting, name: "Unified Layer (Bluehost)"}
+  32475: {class: foreign_hosting, name: "SingleHop"}
+  22612: {class: foreign_hosting, name: "Namecheap"}
+  36352: {class: foreign_hosting, name: "ColoCrossing"}
+  47583: {class: foreign_hosting, name: "Hostinger"}
+  55293: {class: foreign_hosting, name: "A2 Hosting"}
+  8560: {class: foreign_hosting, name: "IONOS"}
+  62240: {class: foreign_hosting, name: "Clouvider"}
+  45102: {class: foreign_hosting, name: "Alibaba (Singapore)"}
+  135377: {class: foreign_hosting, name: "UCloud"}
+  394695: {class: foreign_hosting, name: "PublicDomainRegistry / HostGator"}
+  394625: {class: foreign_hosting, name: "PDR / Hostgator"}
+  133480: {class: foreign_hosting, name: "Intergrid AU"}
+  9370: {class: foreign_hosting, name: "Sakura Internet"}
+  132335: {class: foreign_hosting, name: "Web Werks India"}
+  394380: {class: foreign_hosting, name: "Leaseweb USA"}
+  60781: {class: foreign_hosting, name: "Leaseweb NL"}
+  8100: {class: foreign_hosting, name: "QuadraNet"}
+  # Indian transit/hosting frequently seen behind Nepali sites
+  55836: {class: foreign_hosting, name: "Reliance Jio"}
+  9498: {class: foreign_hosting, name: "Bharti Airtel"}
+  4755: {class: foreign_hosting, name: "TATA Communications"}
+  # Added 2026-08-05 after the first full Phase 2 scan showed these as the
+  # largest contributors to the "unknown" ownership bucket -- all
+  # well-established Western hosting/cloud providers, low ambiguity (unlike
+  # the Nepali entries above, these did not need live re-verification).
+  48254: {class: foreign_hosting, name: "20i Limited, GB"}
+  204800: {class: foreign_hosting, name: "WHG Hosting Services (SGP), GB"}
+  199404: {class: foreign_hosting, name: "WHG Hosting Services (IN), GB"}
+  14670: {class: foreign_hosting, name: "WHG Hosting Services (US-East-1), GB"}
+  51713: {class: foreign_hosting, name: "WHG Hosting Services (London), GB"}
+  209341: {class: foreign_hosting, name: "WHG Hosting Services (Frankfurt), GB"}
+  216180: {class: foreign_hosting, name: "WHG Hosting Services (Australia), GB"}
+  28753: {class: foreign_hosting, name: "Leaseweb Deutschland GmbH"}
+  14555: {class: foreign_hosting, name: "LiquidNet US LLC"}
+  25653: {class: foreign_hosting, name: "FortressITX"}
+  31898: {class: foreign_hosting, name: "Oracle Corporation / OCI"}
+  19318: {class: foreign_hosting, name: "Interserver, Inc"}
+  33182: {class: foreign_hosting, name: "HostDime.com, Inc."}
+  19871: {class: foreign_hosting, name: "Network Solutions, LLC"}
+  63410: {class: foreign_hosting, name: "PrivateSystems Networks"}
+  53831: {class: foreign_cdn, name: "Squarespace, Inc. (hosted-platform edge)"}
+  40244: {class: foreign_hosting, name: "Turnkey Internet Inc."}
+  59253: {class: foreign_hosting, name: "Leaseweb Singapore"}
+  22611: {class: foreign_hosting, name: "InMotion Hosting, Inc."}
+
+  # ---------------- nepali_hosting ----------------
+  # Every entry below was LIVE-VERIFIED against Team Cymru's DNS whois
+  # (AS<n>.asn.cymru.com) on 2026-08-05 by probe/asn_probe.py -- not
+  # recalled from training data. This distinction matters: the first draft
+  # of this section (recalled, not verified) got roughly half its ASN
+  # numbers wrong -- e.g. it had 38565 labeled "Subisu Cablenet" when
+  # AS38565 is actually Ncell; had 17465 labeled "Websurfer Nepal" when
+  # AS17465 is an Indian cable ISP with no Nepal connection at all. A wrong
+  # numeric ASN in this direction (a real foreign ASN mislabeled as
+  # nepali_hosting) is the dangerous failure mode for RQ2 -- it would
+  # silently misclassify any domain actually hosted on that foreign ASN.
+  # Every wrong guess from the first draft was removed rather than kept
+  # alongside a correction. See phases.md Phase 2 for the full account.
+  17501: {class: nepali_hosting, name: "WorldLink Communications Pvt Ltd"}
+  23752: {class: nepali_hosting, name: "Nepal Telecommunications Corporation (NTC)"}
+  4007: {class: nepali_hosting, name: "Subisu Cablenet (Pvt) Ltd"}
+  38565: {class: nepali_hosting, name: "Ncell Pvt. Ltd."}
+  45650: {class: nepali_hosting, name: "Vianet Communications"}
+  55915: {class: nepali_hosting, name: "Classic Tech Pvt. Ltd."}
+  45845: {class: nepali_hosting, name: "Nepal International Internet Gateway (NIIG)"}
+  55427: {class: nepali_hosting, name: "Broadlink Nepal"}
+  63991: {class: nepali_hosting, name: "Arrownet Pvt. Ltd."}
+  58504: {class: nepali_hosting, name: "Techminds Networks Pvt. Ltd."}
+  4613: {class: nepali_hosting, name: "Mercantile Office Systems"}
+  132799: {class: nepali_hosting, name: "Dish Media Network Public Limited"}
+  45353: {class: nepali_hosting, name: "National Information Technology Centre (NITC)"}
+
+  # Known Nepali operators with NO verified numeric ASN as of 2026-08-05 --
+  # deliberately left out of the numeric table rather than guessed again.
+  # Websurfer Nepal: websurfer.com.np's own site returned no Cymru origin
+  #   data (may be CDN-fronted or the domain guess itself may be stale).
+  # Smart Cell / Smart Telecom: smartcell.com.np did not resolve at all;
+  #   the real domain and ASN are both unconfirmed.
+  # NPIX (Nepal Internet Exchange) member ASNs: not a single ASN, would need
+  #   enumerating IXP participants separately.
+  # These still have a fighting chance of being caught by the name-pattern
+  # fallback below if their true ASN's registered name contains a
+  # recognizable substring -- but will legitimately land in "unknown" most
+  # of the time until someone looks up their real ASN.
+
+# Regex fallbacks applied to the ASN's registered name when the numeric ASN is
+# absent from the table above. A match still records the raw name so that the
+# decision is auditable; it does not overwrite an explicit numeric entry.
+name_patterns:
+  foreign_cdn:
+    - "(?i)cloudflare"
+    - "(?i)fastly"
+    - "(?i)akamai"
+    - "(?i)cloudfront"
+    - "(?i)edgecast|edgio|limelight"
+    - "(?i)bunny\\s*cdn|bunnyway"
+  foreign_hosting:
+    - "(?i)digitalocean"
+    - "(?i)hetzner"
+    - "(?i)linode"
+    - "(?i)ovh"
+    - "(?i)vultr|choopa"
+    - "(?i)namecheap|hostinger|godaddy|bluehost|hostgator"
+    - "(?i)whg[ -]hosting|whg-"
+    - "(?i)leaseweb|interserver|hostdime|network\\s*solutions"
+  nepali_hosting:
+    - "(?i),\\s*NP$"          # Cymru appends the country code
+    - "(?i)nepal"
+    - "(?i)subisu|worldlink|vianet|classic\\s*tech|websurfer|techminds|arrownet|broadlink"
+    - "(?i)ncell|nptelecom|nitc|npix|nren|dish\\s*media|mercantile"

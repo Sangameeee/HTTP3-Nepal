@@ -1,0 +1,28 @@
+# Telecom / ISP seed list.
+#
+# Provenance: NTA's top-10-by-subscriber ISP ranking (per market-share search
+# results retrieved 2026-08-05, mid-October 2025 data: WorldLink, DishHome,
+# Nepal Telecom, Vianet, Classic Tech, Subisu, Websurfer, Techminds, Wifi
+# Nepal, CG Communications) plus NTA-licensed mobile operators. Domains for
+# the ranked ISPs are best-effort recall (Wikipedia's ISP list gave names but
+# no URLs); DNS validation in build_corpus.py drops non-resolving entries.
+sector: telecom
+source: curated_nta_licensees
+notes: "Top-10-by-subscriber NTA-licensed ISPs and mobile operators"
+domains:
+  - nta.gov.np
+  - ntc.net.np
+  - ncell.axiata.com
+  - smartcell.com.np
+  - worldlink.com.np
+  - dishhome.com.np
+  - vianet.com.np
+  - classictech.com.np
+  - subisu.net.np
+  - websurfer.com.np
+  - techminds.com.np
+  - wifinepal.com.np
+  - cgcommunication.com.np
+  - mercantile.com.np
+  - arrownet.com.np
+  - broadlink.com.np

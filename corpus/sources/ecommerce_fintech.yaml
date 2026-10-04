@@ -1,0 +1,38 @@
+# E-commerce and fintech seed list.
+#
+# Provenance: hand-compiled list of the Nepal-operating platforms named in the
+# brief plus their closest competitors by app-store presence, as of
+# 2026-08-05. daraz.com.np and esewa.com.np were independently confirmed via
+# web search (blog.esewa.com.np references esewa.com.np; multiple sources
+# confirm daraz.com.np). The remaining entries are best-effort recall, not
+# externally corroborated, and subject to DNS-validation drop by
+# build_corpus.py. Many of these are hosted regionally rather than in Nepal,
+# which is itself relevant to RQ2.
+sector: ecommerce_fintech
+source: curated_manual
+notes: "Marketplaces, delivery/logistics platforms, digital wallets"
+domains:
+  - daraz.com.np
+  - foodmandu.com
+  - pathao.com
+  - esewa.com.np
+  - khalti.com
+  - imepay.com.np
+  - sastodeal.com
+  - hamrobazar.com
+  - muncha.com
+  - thegroceryapp.com
+  - bhatbhateni.com
+  - okhati.com
+  - gyapu.com
+  - hamropasal.com
+  - kaymu.com.np
+  - merosambad.com
+  - connectips.com
+  - prabhupay.com
+  - fonepay.com
+  - nepalpay.com.np
+  - digitalwallet.com.np
+  - nicasialife.com.np
+  - qpay.com.np
+  - paywell.com.np

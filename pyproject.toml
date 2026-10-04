@@ -1,0 +1,40 @@
+[project]
+name = "quic-nepal"
+version = "0.1.0"
+description = "Measurement pipeline for HTTP/3 and QUIC adoption in Nepal (CDN vs origin-native)"
+readme = "README.md"
+requires-python = ">=3.11"
+
+# Phase 1 (corpus construction) needs only the pure-Python / wheel-available set.
+# Phases 2-5 dependencies are declared here too, but are installed via extras so
+# that a reviewer can reproduce the corpus without a QUIC stack on their machine.
+dependencies = [
+    "httpx>=0.27",
+    "dnspython>=2.6",
+    "pyyaml>=6.0",
+    "pandas>=2.2",
+    "tldextract>=5.1",
+    "beautifulsoup4>=4.12",
+    "matplotlib>=3.9",  # analysis/figures.py -- needed as soon as any probe/viability data exists, not just Phase 4/5
+]
+
+[project.optional-dependencies]
+probe = [
+    "aioquic>=1.2",
+    "cryptography>=42",
+    "h2>=4.1",
+]
+perf = [
+    "playwright>=1.45",
+    "scipy>=1.13",
+]
+paper = [
+    "python-docx>=1.1",
+]
+
+[tool.setuptools]
+py-modules = []
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"

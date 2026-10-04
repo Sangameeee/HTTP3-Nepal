@@ -1,0 +1,98 @@
+# Government seed list.
+#
+# Provenance: compiled by hand from the national portal (nepal.gov.np) ministry
+# index, the Office of the Prime Minister and Council of Ministers listing, and
+# the seven provincial government portals, as of 2026-08-05.
+#
+# This list only SEEDS the enumeration. The authoritative government sample
+# comes from Certificate Transparency (%.gov.np) plus the nepal.gov.np crawl;
+# entries here that do not resolve are dropped and logged in
+# corpus/rejected.csv rather than silently kept.
+#
+# These entries are best-effort recall of ministry/department names and
+# conventional gov.np naming patterns, not independently verified against a
+# live crawl of nepal.gov.np at authoring time. That live crawl and CT
+# enumeration (both run by build_corpus.py) are what actually establishes
+# corpus membership for this sector; this file exists so the government
+# sector still has candidates if crt.sh or the crawl is unreachable on a
+# given run.
+sector: government
+source: curated_gov_portal
+notes: "Ministries, central departments, constitutional bodies, provincial portals"
+domains:
+  # National portal and executive
+  - nepal.gov.np
+  - opmcm.gov.np
+  - mofa.gov.np
+  - mof.gov.np
+  - moha.gov.np
+  - moe.gov.np
+  - mohp.gov.np
+  - moald.gov.np
+  - moics.gov.np
+  - mopit.gov.np
+  - moewri.gov.np
+  - mofaga.gov.np
+  - moljpa.gov.np
+  - mowcsc.gov.np
+  - moyc.gov.np
+  - mocit.gov.np
+  - mofe.gov.np
+  - moctca.gov.np
+  - molcpa.gov.np
+  - modefence.gov.np
+  - mowr.gov.np
+  # Central departments and authorities
+  - ird.gov.np
+  - customs.gov.np
+  - dor.gov.np
+  - doa.gov.np
+  - doe.gov.np
+  - dolidar.gov.np
+  - dhm.gov.np
+  - cbs.gov.np
+  - nid.gov.np
+  - dofe.gov.np
+  - immigration.gov.np
+  - nepalpolice.gov.np
+  - apf.gov.np
+  - dao.gov.np
+  - lmis.gov.np
+  - pmis.gov.np
+  - nitc.gov.np
+  - doi.gov.np
+  - dos.gov.np
+  - dwss.gov.np
+  - dws.gov.np
+  - dolpm.gov.np
+  # Constitutional / oversight bodies
+  - election.gov.np
+  - supremecourt.gov.np
+  - oag.gov.np
+  - ciaa.gov.np
+  - psc.gov.np
+  - nhrcnepal.gov.np
+  - npc.gov.np
+  - parliament.gov.np
+  - lawcommission.gov.np
+  # Regulators and state entities with .gov.np presence
+  - sebon.gov.np
+  - nta.gov.np
+  - nea.org.np
+  - noc.org.np
+  - dofe.gov.np
+  - ncell.gov.np
+  # Provincial governments
+  - koshi.gov.np
+  - madhesh.gov.np
+  - bagamati.gov.np
+  - gandaki.gov.np
+  - lumbini.gov.np
+  - karnali.gov.np
+  - sudurpashchim.gov.np
+  # Selected metropolitan / local bodies (largest by population)
+  - kathmandu.gov.np
+  - pokharamun.gov.np
+  - lalitpurmun.gov.np
+  - bharatpurmun.gov.np
+  - biratnagarmun.gov.np
